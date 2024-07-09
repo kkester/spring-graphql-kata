@@ -1,4 +1,4 @@
-# Spring GraphQL Application
+# Spring GraphQL Kata
 
 Launch the application and visit [graphiql](http://localhost:8080/graphiql)
 
@@ -16,6 +16,41 @@ query {
         status
         quantity
       }
+    }
+  }
+}
+```
+
+```graphql
+{
+  allCategories {
+    displayText
+    products {
+      name
+      description
+    }
+  }
+}
+```
+
+```graphql
+{
+  allProducts {
+    name
+    description
+    createdDate
+    catalogs {
+      name
+      description
+      startDate
+      endDate
+    }
+    category {
+      displayText
+    }
+    inventoryStatus {
+      status
+      quantity
     }
   }
 }
