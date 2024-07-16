@@ -1,6 +1,18 @@
 # Spring GraphQL Kata
 
-Launch the application and visit [graphiql](http://localhost:8080/graphiql)
+The intent of this kata is to expose the applications domain model via GraphQL. See the [GraphQL Spring Guide](https://spring.io/guides/gs/graphql-server) for details.  Below, there are a set of GraphQL statements defined.  The goal of this kata is add the code needed to support the defined queries and mutations.
+
+### The Domain Model
+This project contains four domains: Catalog, Product, Inventory, and Category.  Catalog, Product, and Category are independent entities and can exist on their own.  Inventory requires the existence of a product for which the inventory data pertains.  Catalogs contain a collection or products and products can belong to multiple catalogs.  A category contains multiple products, but a product can only belong to one category.  Each product contains a sku which must be unique across all products and may have an optional inventory status associated with it.
+
+### Prerequisites 
+* Docker
+* Java 17 (Java 21 recommended)
+* IntelliJ GraphQL plugin (optional)
+
+### Queries and Mutations to Support
+
+The following are the queries and mutations that the application should support.  These statements should be executed in the `GraphIQL` UI.  Add the `spring.graphql.graphiql.enabled=true` property to the `application.yaml` to enable access to the UI.  Once the property is added and the application is launched, navigate to [http://localhost:8080/graphiql](http://localhost:8080/graphiql) to access the UI.
 
 ```graphql
 query {
@@ -22,7 +34,7 @@ query {
 ```
 
 ```graphql
-{
+query {
   allCategories {
     displayText
     products {
@@ -34,7 +46,7 @@ query {
 ```
 
 ```graphql
-{
+query {
   allProducts {
     name
     description
@@ -64,6 +76,29 @@ mutation {
     inventoryStatus {
       status
       quantity
+    }
+  }
+}
+```
+
+```graphql
+query {
+  getProductById(productId:1) {
+    name
+    description
+    sku
+    createdDate
+    inventoryStatus {
+      status
+      quantity
+    }
+    category {
+      name
+    }
+    catalogs {
+      name
+      startDate
+      endDate
     }
   }
 }

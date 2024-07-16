@@ -21,6 +21,12 @@ public class ProductController {
         return productRepository.findAll();
     }
 
+    @QueryMapping
+    public ProductEntity getProductById(@Argument("productId") Long productId) {
+        return productRepository.findById(productId)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatusCode.valueOf(404)));
+    }
+
     @MutationMapping
     public ProductEntity createInventoryStatus(@Argument("productId") Long productId, @Argument("status") InventoryStatus status, @Argument("quantity") Integer quantity) {
         ProductEntity productEntity = productRepository.findById(productId).orElseThrow(() -> new ResponseStatusException(HttpStatusCode.valueOf(404)));

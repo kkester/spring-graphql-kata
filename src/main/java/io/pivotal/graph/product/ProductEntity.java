@@ -5,7 +5,6 @@ import io.pivotal.graph.category.CategoryEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

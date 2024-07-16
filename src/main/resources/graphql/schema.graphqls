@@ -2,6 +2,7 @@ type Query {
     allCatalogs: [Catalog]
     allCategories: [Category]
     allProducts: [Product]
+    getProductById(productId: ID): Product
 }
 
 type Mutation {
