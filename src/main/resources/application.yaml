@@ -7,6 +7,3 @@ spring:
     password: ${POSTGRES_PASSWORD:secret}
   jpa:
     show-sql: true
-  threads:
-    virtual:
-      enabled: true
