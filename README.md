@@ -34,7 +34,7 @@ query {
 ```
 
 ```graphql
-{
+query {
   allCategories {
     displayText
     products {
@@ -46,7 +46,7 @@ query {
 ```
 
 ```graphql
-{
+query {
   allProducts {
     name
     description
@@ -76,6 +76,29 @@ mutation {
     inventoryStatus {
       status
       quantity
+    }
+  }
+}
+```
+
+```graphql
+query {
+  getProductById(productId:1) {
+    name
+    description
+    sku
+    createdDate
+    inventoryStatus {
+      status
+      quantity
+    }
+    category {
+      name
+    }
+    catalogs {
+      name
+      startDate
+      endDate
     }
   }
 }
