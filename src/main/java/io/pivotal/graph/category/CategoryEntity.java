@@ -1,9 +1,11 @@
 package io.pivotal.graph.category;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.pivotal.graph.product.ProductEntity;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -11,7 +13,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "CATEGORY")
@@ -28,12 +29,5 @@ public class CategoryEntity {
     private LocalDateTime createdDate;
     
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    @Builder.Default
-    @JsonIgnore
     private List<ProductEntity> products = new ArrayList<>();
-
-    public void addProduct(ProductEntity productEntity) {
-        products.add(productEntity);
-        productEntity.setCategory(this);
-    }
 }

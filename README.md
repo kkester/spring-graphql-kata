@@ -70,14 +70,17 @@ query {
 
 ```graphql
 mutation {
-  createInventoryStatus(productId: 1, status: IN_STOCK, quantity: 10) {
-    name
-    description
-    inventoryStatus {
-      status
-      quantity
+    createInventoryStatus(
+        productId: 1
+        inventoryStatus: {quantity: 10, status: IN_STOCK}
+    ) {
+        name
+        sku
+        inventoryStatus {
+            quantity
+            status
+        }
     }
-  }
 }
 ```
 

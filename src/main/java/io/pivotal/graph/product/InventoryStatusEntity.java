@@ -1,24 +1,27 @@
 package io.pivotal.graph.product;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
-@Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "INVENTORY_STATUS")
 public class InventoryStatusEntity {
     @Id
-    @JsonIgnore
-    private Long productId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "inventory_status_id")
+    private Long id;
+
     @OneToOne
     @JoinColumn(name = "product_id")
-    @MapsId
-    @JsonIgnore
     private ProductEntity product;
+
     private InventoryStatus status;
+
     private Integer quantity;
 }
