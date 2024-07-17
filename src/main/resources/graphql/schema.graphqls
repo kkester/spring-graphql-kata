@@ -6,7 +6,7 @@ type Query {
 }
 
 type Mutation {
-    createInventoryStatus(productId: ID, status: InventoryStatuses, quantity: Int): Product
+    createInventoryStatus(productId: ID, inventoryStatus: InventoryStatusInput): Product
 }
 
 type Catalog {
@@ -36,6 +36,11 @@ type Product {
     category: Category
     catalogs: [Catalog]
     inventoryStatus: InventoryStatus
+}
+
+input InventoryStatusInput {
+    status: InventoryStatuses
+    quantity: Int
 }
 
 type InventoryStatus {

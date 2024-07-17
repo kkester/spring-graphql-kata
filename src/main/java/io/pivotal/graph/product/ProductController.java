@@ -28,15 +28,15 @@ public class ProductController {
     }
 
     @MutationMapping
-    public ProductEntity createInventoryStatus(@Argument("productId") Long productId, @Argument("status") InventoryStatus status, @Argument("quantity") Integer quantity) {
+    public ProductEntity createInventoryStatus(@Argument("productId") Long productId, @Argument("inventoryStatus") InventoryStatusEntity inventoryStatus, @Argument("quantity") Integer quantity) {
         ProductEntity productEntity = productRepository.findById(productId).orElseThrow(() -> new ResponseStatusException(HttpStatusCode.valueOf(404)));
-        InventoryStatusEntity inventoryStatus = productEntity.getInventoryStatus();
-        if (inventoryStatus == null) {
-            inventoryStatus = new InventoryStatusEntity();
+        InventoryStatusEntity currentInventoryStatus = productEntity.getInventoryStatus();
+        if (currentInventoryStatus == null) {
             productEntity.applyInventoryStatus(inventoryStatus);
+        } else {
+            currentInventoryStatus.setStatus(inventoryStatus.getStatus());
+            currentInventoryStatus.setQuantity(inventoryStatus.getQuantity());
         }
-        inventoryStatus.setStatus(status);
-        inventoryStatus.setQuantity(quantity);
         return productRepository.save(productEntity);
     }
 }

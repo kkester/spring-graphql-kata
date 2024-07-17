@@ -1,11 +1,12 @@
 package io.pivotal.graph.catalog;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.pivotal.graph.product.ProductEntity;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -13,7 +14,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "CATALOG")
@@ -35,12 +35,5 @@ public class CatalogEntity {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "CATALOG_PRODUCT", joinColumns = @JoinColumn(name = "CATALOG_ID"), inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
-    @Builder.Default
-    @JsonIgnore
     private List<ProductEntity> products = new ArrayList<>();
-
-    public void addProduct(ProductEntity productEntity) {
-        this.products.add(productEntity);
-        productEntity.getCatalogs().add(this);
-    }
 }
